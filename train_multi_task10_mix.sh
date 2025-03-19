@@ -24,18 +24,15 @@ LLM_LAYER=mix_freezeLLM_AdaptiveLayerDefaultDitsWithLearnable_test
 export HF_HOME=/home/huggingface
 
 
-# device='0,1,2,3,4,5,6,7'  # 一定要设这个才能使用FDSP！！！
-# device='4,5,6,7'  # 一定要设这个才能使用FDSP！！！
-device=$7  # 一定要设这个才能使用FDSP！！！
-# device='4'  # 一定要设这个才能使用FDSP！！！
+# device='0,1,2,3,4,5,6,7' 
+# device='4,5,6,7' 
+device=$7  
+# device='4' 
 
-current_dir=$(pwd)
-# 提取路径的第二部分并构造 ckpt_root
-second_dir=$(echo "$current_dir" | cut -d"/" -f2)
-export PATH=$PATH:/$second_dir/dmh/Cogact_test
-export PYTHONPATH=$PYTHONPATH:/$second_dir/dmh/Cogact_test  # CogAct official model
-export PATH=$PATH:/$second_dir/dmh/Cogact_test/vla
-export PYTHONPATH=$PYTHONPATH:/$second_dir/dmh/Cogact_test/vla 
+export PATH=$PATH:/path/to/MoLE_VLA
+export PYTHONPATH=$PYTHONPATH:/path/to/MoLE_VLA
+export PATH=$PATH:/path/to/MoLE_VLA/vla
+export PYTHONPATH=$PYTHONPATH:/path/to/MoLE_VLA/vla 
 
 export EMA_DECAY=${ema_decay}
 export MSE=${mse_weight}
@@ -52,8 +49,8 @@ SETTING=${SETTING} COG_RES=${cog_res} RANDOM_SEED=${seed} USE_INDEX=${use_index}
   --vla.epochs 100 \
   --vla.freeze_vision_backbone ${FREEZE_VISON} \
   --vla.freeze_llm_backbone ${FREEZE_LLM} \
-  --data_root_dir /home/dmh/hydra/cogact/datasets/${TASK} \
-  --run_root_dir /home/dmh/CogACT_test/checkpoint/${TASK}_cogact_large \
+  --data_root_dir /path/to/dataset \
+  --run_root_dir /path/to/save_dir \
   --run_id exp_cx_LLMLAYER_${LLM_LAYER}_${TASK}_${SETTING} \
   --image_aug false \
   --save_interval 800 \
@@ -63,7 +60,7 @@ SETTING=${SETTING} COG_RES=${cog_res} RANDOM_SEED=${seed} USE_INDEX=${use_index}
   --load_dit ${LOAD_DIT} \
   --action_model_type DiT-B \
   --is_resume False \
-  --pretrained_checkpoint "/home/cx/chenhao/hub/models--CogACT--CogACT-Base/snapshots/ffc4db3bef7735ba7aa692d50b6454588a32b753/checkpoints/CogACT-Base.pt" \
+  --pretrained_checkpoint "/path/to/pretrained_model" \
 
 
 
