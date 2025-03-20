@@ -6,7 +6,7 @@ balance_weight=$3
 KD_weight=$4
 add_lstm=False
 route_in_for=False
-use_index=False # 为False是就是目前的sota strategy
+use_index=False 
 seed=$5
 ema_decay=$6
 # SETTING=freeze_vit_window${FUTURE_ACTION_STEPS}
@@ -61,41 +61,5 @@ SETTING=${SETTING} COG_RES=${cog_res} RANDOM_SEED=${seed} USE_INDEX=${use_index}
   --action_model_type DiT-B \
   --is_resume False \
   --pretrained_checkpoint "/path/to/pretrained_model" \
-
-
-
-
-
-# tasks=("put_rubbish_in_bin_sparse" "toilet_seat_down_sparse" "unplug_charger_sparse" "close_laptop_lid_sparse" "water_plants_sparse")
-
-# for task in "${tasks[@]}"; do
-#   echo "Running training for task: $task"
-  
-#   torchrun --standalone --nnodes 1 --nproc-per-node 8 scripts/train.py \
-#     --pretrained_checkpoint "/home/cx/chenhao/hub/models--CogACT--CogACT-Base/snapshots/ffc4db3bef7735ba7aa692d50b6454588a32b753/checkpoints/CogACT-Base.pt" \
-#     --vla.type prism-dinosiglip-224px+oxe+diffusion \
-#     --vla.data_mix rlbench \
-#     --vla.expected_world_size 8 \
-#     --vla.global_batch_size 256 \
-#     --vla.per_device_batch_size 32 \
-#     --vla.learning_rate 2e-5 \
-#     --data_root_dir /home/cx/rlds_dataset_builder/dataset/${task} \
-#     --run_root_dir /home/cx/4dvla/CogACT \
-#     --run_id exp_${task}_freeze_vit_window15 \
-#     --image_aug false \
-#     --wandb_project cogact \
-#     --wandb_entity 1162737898-the-chinese-university-of-hong-kong \
-#     --save_interval 100 \
-#     --repeated_diffusion_steps 8 \
-#     --future_action_window_size 15 \
-#     --action_model_type DiT-B \
-#     --is_resume False
-  
-#   echo "Finished training for task: $task"
-# done
-
-
-
-
 
 #### close_box  close_laptop_lid   put_rubbish_in_bin  unplug_charger  water_plants  toilet_seat_down

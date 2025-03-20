@@ -15,8 +15,8 @@ from huggingface_hub import HfFileSystem, hf_hub_download
 from prismatic.conf import ModelConfig
 train_route = os.environ['TRAIN_ROUTE'].upper()
 if train_route == "TRUE":
-    from MoE_model.materialize import get_llm_backbone_and_tokenizer, get_vision_backbone_and_transform
-    print(f"Loading MoE_model.materialize")
+    from MoLE_VLA_model.materialize import get_llm_backbone_and_tokenizer, get_vision_backbone_and_transform
+    print(f"Loading MoLE_VLA_model.materialize")
 else:
     from prismatic.models.materialize import get_llm_backbone_and_tokenizer, get_vision_backbone_and_transform
     print(f"Loading prismatic.models.materialize")
